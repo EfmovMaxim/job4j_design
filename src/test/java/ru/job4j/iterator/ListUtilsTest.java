@@ -46,7 +46,7 @@ public class ListUtilsTest {
     @Test
     public void whenRemoveAll() {
         List<Integer> input = new ArrayList<>(Arrays.asList(0, 1, 2, 4));
-        ListUtils.removeAll(input,Arrays.asList(7, 2, 4));
+        ListUtils.removeAll(input, Arrays.asList(7, 2, 4));
         assertThat(input, is(Arrays.asList(0, 1)));
     }
 
