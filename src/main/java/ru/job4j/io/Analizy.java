@@ -23,7 +23,10 @@ public class Analizy {
                     openPeriod = false;
                     rsl.add(subLine[1] + ";" + line.split(" ")[1]);
                 }
+            }
 
+            if (openPeriod) {
+                rsl.add(subLine[1] + ";" + "Server not start");
             }
         } catch (Exception e) {
             e.printStackTrace();
