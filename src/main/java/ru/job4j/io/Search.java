@@ -1,4 +1,5 @@
 package ru.job4j.io;
+import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -8,10 +9,24 @@ import java.util.function.Predicate;
 
 public class Search {
 
+    private static void checkArgs(String[] args) {
+        if (args == null || args.length != 2) {
+            throw new IllegalArgumentException("Check arguments");
+        }
+
+        File file = new File(args[0]);
+        if (!file.exists() || !file.isDirectory()) {
+            throw new IllegalArgumentException("set correct directory");
+        }
+
+    }
+
     public static void main(String[] args) throws IOException {
-        Path start = Paths.get("/home/mefimov/Музыка/");
+        checkArgs(args);
+
+        Path start = Paths.get(args[0]);
         search(start, p ->
-                p.toFile().getName().endsWith("log")).forEach(System.out::println);
+                p.toFile().getName().endsWith(args[1])).forEach(System.out::println);
     }
 
     public static List<Path> search(Path root, Predicate<Path> condition) {
