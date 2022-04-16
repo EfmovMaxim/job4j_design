@@ -10,15 +10,6 @@ public class LogFilter {
         List<String> list = new LinkedList<>();
         String line;
         try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
-// вариант 1:
-//            while (reader.read() != -1) {
-//                line = reader.readLine();
-//                String[] splitLine = line.split(" ");
-//                if (splitLine[splitLine.length - 2].equals("404")) {
-//                    list.add(line);
-//                }
-//            }
-// вариант 2:
             list = reader.lines().filter(l -> {
                 String[] splitLine = l.split(" ");
                 return splitLine[splitLine.length - 2].equals("404");
