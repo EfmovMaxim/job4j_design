@@ -21,14 +21,6 @@ public class Search {
 
     }
 
-    public static void main(String[] args) throws IOException {
-        checkArgs(args);
-
-        Path start = Paths.get(args[0]);
-        search(start, p ->
-                p.toFile().getName().endsWith(args[1])).forEach(System.out::println);
-    }
-
     public static List<Path> search(Path root, Predicate<Path> condition) {
         SearchFiles searcher = new SearchFiles(condition);
 
@@ -39,5 +31,13 @@ public class Search {
         }
 
         return searcher.getPaths();
+    }
+
+    public static void main(String[] args) throws IOException {
+        checkArgs(args);
+
+        Path start = Paths.get(args[0]);
+        search(start, p ->
+                p.toFile().getName().endsWith(args[1])).forEach(System.out::println);
     }
 }

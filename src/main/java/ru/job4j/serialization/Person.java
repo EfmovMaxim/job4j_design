@@ -1,11 +1,22 @@
 package ru.job4j.serialization;
 
+import javax.xml.bind.annotation.*;
 import java.io.Serializable;
 
+@XmlRootElement(name = "person")
+@XmlAccessorType(XmlAccessType.FIELD)
 public class Person implements Serializable {
+    @XmlAttribute
     private String name;
+    @XmlAttribute
     private String surname;
+    @XmlAttribute
     private int age;
+
+    public Person() {
+        this("test", "test", 0);
+    }
+
 
     public Person(String name, String surname, int age) {
         this.name = name;
