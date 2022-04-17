@@ -1,9 +1,15 @@
 package ru.job4j.io;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
 public class EchoServer {
+
+    private static final Logger LOG = LoggerFactory.getLogger(UsageLog4j.class.getName());
+
     public static void main(String[] args) throws IOException {
         try (ServerSocket server = new ServerSocket(9000)) {
             while (!server.isClosed()) {
@@ -19,16 +25,18 @@ public class EchoServer {
                             server.close();
                             break;
                         } else if (str.contains("?msg=Hello")) {
-                            //out.write("HTTP/1.1 200 OK\r\n\r\n".getBytes());
                             out.write("Hello, dear friend.".getBytes());
                         } else if (str.contains("?msg=Any")) {
-                            //out.write("HTTP/1.1 200 OK\r\n\r\n".getBytes());
                             out.write("What.".getBytes());
                         }
                     }
                     out.flush();
+                } catch (Exception ex) {
+                    LOG.debug("IO failed:", ex);
                 }
             }
+        } catch (Exception ex) {
+            LOG.debug("Server failed:", ex);
         }
     }
 }

@@ -12,5 +12,15 @@ public class UsageLog4j {
         LOG.info("info message");
         LOG.warn("warn message");
         LOG.error("error message");
+
+        String s = "error";
+        int i = 9;
+        double d = 2.3;
+        float f = 5f;
+        byte b = 5;
+        char ch = 'N';
+
+
+        LOG.debug("s - {} i - {} d - {} f - {} b - {} ch - {}", s, i, d, f, b, ch);
     }
 }
