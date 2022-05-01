@@ -33,6 +33,7 @@ public class Contact implements Serializable {
         this.person = person;
     }
 
+
     public int getZipCode() {
         return zipCode;
     }
