@@ -35,40 +35,28 @@ public class TableEditor implements AutoCloseable {
     }
 
     public void createTable(String tableName) {
-        try (Statement statement = connection.createStatement()) {
-            statement.execute(String.format("create table if not exists %s(id serial primary key);", tableName));
-        } catch (Exception ex) {
-            ex.printStackTrace();
-        }
+        executeStatement(String.format("create table if not exists %s(id serial primary key);", tableName));
     }
 
     public void dropTable(String tableName) {
-        try (Statement statement = connection.createStatement()) {
-            statement.execute(String.format("drop table if exists %s;", tableName));
-        } catch (Exception ex) {
-            ex.printStackTrace();
-        }
+        executeStatement(String.format("drop table if exists %s;", tableName));
     }
 
     public void addColumn(String tableName, String columnName, String type) {
-        try (Statement statement = connection.createStatement()) {
-            statement.execute(String.format("alter table %s add column if not exists %s %s;", tableName, columnName, type));
-        } catch (Exception ex) {
-            ex.printStackTrace();
-        }
+        executeStatement(String.format("alter table %s add column if not exists %s %s;", tableName, columnName, type));
     }
 
     public void dropColumn(String tableName, String columnName) {
-        try (Statement statement = connection.createStatement()) {
-            statement.execute(String.format("alter table %s drop column if exists %s;", tableName, columnName));
-        } catch (Exception ex) {
-            ex.printStackTrace();
-        }
+        executeStatement(String.format("alter table %s drop column if exists %s;", tableName, columnName));
     }
 
     public void renameColumn(String tableName, String columnName, String newColumnName) {
+        executeStatement(String.format("alter table %s rename %s to %s;", tableName, columnName, newColumnName));
+    }
+
+    private void executeStatement(String sqlQuery) {
         try (Statement statement = connection.createStatement()) {
-            statement.execute(String.format("alter table %s rename %s to %s;", tableName, columnName, newColumnName));
+            statement.execute(sqlQuery);
         } catch (Exception ex) {
             ex.printStackTrace();
         }
